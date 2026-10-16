@@ -93,7 +93,7 @@ Copy-Item (Join-Path $Bin 'deckcraft.exe'), (Join-Path $Bin 'deckcraft-cli.exe')
 # ---- MSI ---------------------------------------------------------------------------------------
 $Msi = Join-Path $Dist "deckcraft-$Version-windows-$Arch.msi"
 Invoke-Native 'wix build' {
-  wix build (Join-Path $PSScriptRoot 'deckcraft.wxs') -arch $Arch `
+  wix build (Join-Path $PSScriptRoot 'deckcraft.wxs') (Join-Path $PSScriptRoot 'installer-ui.wxs') -arch $Arch `
     -d "Version=$MsiVersion" -d "BinDir=$Stage" -d "IconPath=$(Join-Path $Root 'assets\app-icon\deckcraft.ico')" `
     -o $Msi
 }
